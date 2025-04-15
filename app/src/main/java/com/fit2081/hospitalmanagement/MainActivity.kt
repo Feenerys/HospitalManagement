@@ -1,6 +1,7 @@
 package com.fit2081.hospitalmanagement
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,6 +20,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -212,6 +214,19 @@ fun PatientCard(patient: Patient, context: Context, onDelete: () -> Unit) {
                     Icon(Icons.Filled.Delete, contentDescription = "Delete", tint = Color.Red)
                 }
 
+                IconButton(onClick = {
+                    val messageToShare = "Patient Name: ${patient.name}\n"+
+                            "Age: ${patient.age}\n" +
+                            "Address: ${patient.address}"
+
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, messageToShare)
+                    }
+                    context.startActivity((Intent.createChooser(intent, "Share Patient Details")))
+                }) {
+                    Icon(Icons.Filled.Share, contentDescription = "Share")
+                }
             }
         }
     }
