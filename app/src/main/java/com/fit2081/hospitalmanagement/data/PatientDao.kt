@@ -23,6 +23,9 @@ interface PatientDao {
     @Query("DELETE FROM patients")
     suspend fun deleteAllPatients()
 
+    @Query("DELETE FROM patients WHERE id = :patientId")
+    suspend fun deletePatientById(patientId: Int)
+
     // Flow is a data stream that can be observed for changes
     @Query("SELECT * FROM patients ORDER BY id ASC")
     fun getAllPatients(): Flow<List<Patient>>

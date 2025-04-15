@@ -28,6 +28,10 @@ class PatientViewModel(context: Context) : ViewModel() {
         patientRepo.deleteAllPatients()
     }
 
+    fun deletePatientById(patientId: Int) = viewModelScope.launch {
+        patientRepo.deletePatientById(patientId)
+    }
+
     // ViewModel factory that sets the context for the viewmodel and the
     // ViewModelProvider.Factory interface is used to create new viewmodels
     class PatientViewModelFactory(context: Context) : ViewModelProvider.Factory {

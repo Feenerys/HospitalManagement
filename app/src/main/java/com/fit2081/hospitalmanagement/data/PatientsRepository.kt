@@ -27,5 +27,9 @@ class PatientsRepository {
         patientDao.deleteAllPatients()
     }
 
+    suspend fun deletePatientById(id: Int) {
+        patientDao.deletePatientById(id)
+    }
+
     fun getAllPatients(): Flow<List<Patient>> = patientDao.getAllPatients()
 }
